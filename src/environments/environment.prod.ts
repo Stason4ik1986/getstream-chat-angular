@@ -1,15 +1,15 @@
 export const environment = {
   firebase: {
-    projectId: 'get-stream-io-decoded',
-    appId: '1:927914767744:web:83eed8f5f5377a9dd9fd65',
-    storageBucket: 'get-stream-io-decoded.appspot.com',
-    apiKey: 'AIzaSyA9mGI5hYOfgtpDTdCPz8PBdpumEWvhHBQ',
-    authDomain: 'get-stream-io-decoded.firebaseapp.com',
-    messagingSenderId: '927914767744',
+    projectId: 'get-stream-io-chat',
+    appId: '1:45341333118:web:1adf1d1279f052074d2a2f',
+    storageBucket: 'get-stream-io-chat.appspot.com',
+    apiKey: 'AIzaSyDD2o47Kbw1byvpMX473dVqKBRT97e54pg',
+    authDomain: 'get-stream-io-chat.firebaseapp.com',
+    messagingSenderId: '45341333118',
   },
   production: true,
-  apiUrl: 'https://us-central1-get-stream-io-decoded.cloudfunctions.net',
+  apiUrl: 'https://us-central1-get-stream-io-chat.cloudfunctions.net',
   stream: {
-    key: 'wxgsgqrws5v8'
-  }
+    key: '6gjff8r7rwuc',
+  },
 };

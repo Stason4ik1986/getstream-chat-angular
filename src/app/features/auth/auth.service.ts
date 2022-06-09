@@ -1,54 +1,69 @@
-import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { Auth, authState, createUserWithEmailAndPassword, signInWithEmailAndPassword } from '@angular/fire/auth';
-import { updateProfile } from '@firebase/auth';
-import { BehaviorSubject, forkJoin, from, pluck, switchMap } from 'rxjs';
-import { SigninCredentials, SignupCredentials } from './auth.model';
 import { environment } from '../../../environments/environment';
 
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+
+import { from, pluck, switchMap, forkJoin, BehaviorSubject } from 'rxjs';
+import { updateProfile } from '@firebase/auth';
+import {
+  Auth,
+  authState,
+  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
+} from '@angular/fire/auth';
+
+import { SigninCredentials, SignupCredentials } from './models';
+
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
-
   private authState = new BehaviorSubject<Object | null>(null);
-  
-  readonly isLoggedIn$ = authState(this.auth);
 
-  constructor(private auth: Auth, private http: HttpClient) { }
+  readonly isLoggedIn$ = authState(this._auth);
+
+  constructor(
+    private readonly _auth: Auth,
+    private readonly _http: HttpClient
+  ) {}
 
   getStreamToken() {
-    return this.http.post<{ token: string }>(`${environment.apiUrl}/createStreamToken`, {
-      user: this.getCurrentUser()
-    }).pipe(pluck('token'))
+    return this._http
+      .post<{ token: string }>(`${environment.apiUrl}/createStreamToken`, {
+        user: this.getCurrentUser(),
+      })
+      .pipe(pluck('token'));
   }
 
   getCurrentUser() {
-    return this.auth.currentUser!;
+    return this._auth.currentUser!;
   }
 
   signIn({ email, password }: SigninCredentials) {
-    return from(signInWithEmailAndPassword(this.auth, email, password));
+    return from(signInWithEmailAndPassword(this._auth, email, password));
   }
 
   signUp({ email, password, displayName }: SignupCredentials) {
-    return from(createUserWithEmailAndPassword(this.auth, email, password)).pipe(
-      switchMap(({ user }) => forkJoin([
-        updateProfile(user, { displayName }),
-        this.http.post(
-          `${environment.apiUrl}/createStreamUser`, 
-          { user: {...user, displayName } })
-      ])),
+    return from(
+      createUserWithEmailAndPassword(this._auth, email, password)
+    ).pipe(
+      switchMap(({ user }) =>
+        forkJoin([
+          updateProfile(user, { displayName }),
+          this._http.post(`${environment.apiUrl}/createStreamUser`, {
+            user: { ...user, displayName },
+          }),
+        ])
+      )
     );
   }
 
   signOut() {
-    const user = this.auth.currentUser;
-    return from(this.auth.signOut()).pipe(
-      switchMap(() => this.http.post(
-        `${environment.apiUrl}/revokeStreamUserToken`,
-        { user }
-      ))
+    const user = this._auth.currentUser;
+    return from(this._auth.signOut()).pipe(
+      switchMap(() =>
+        this._http.post(`${environment.apiUrl}/revokeStreamUserToken`, { user })
+      )
     );
   }
 }

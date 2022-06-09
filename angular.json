@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "getstream-chat-angular-example": {
+    "getstream-chat-angular": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -20,19 +20,14 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/getstream-chat-angular-example",
+            "outputPath": "dist/getstream-chat-angular",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
-            "assets": [
-              "src/favicon.ico",
-              "src/assets"
-            ],
-            "styles": [
-              "src/styles.scss"
-            ],
+            "assets": ["src/favicon.ico", "src/assets"],
+            "styles": ["src/styles.scss"],
             "scripts": []
           },
           "configurations": {
@@ -40,8 +35,8 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "500kb",
-                  "maximumError": "1mb"
+                  "maximumWarning": "2mb",
+                  "maximumError": "10mb"
                 },
                 {
                   "type": "anyComponentStyle",
@@ -72,10 +67,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "getstream-chat-angular-example:build:production"
+              "browserTarget": "getstream-chat-angular:build:production"
             },
             "development": {
-              "browserTarget": "getstream-chat-angular-example:build:development"
+              "browserTarget": "getstream-chat-angular:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -83,7 +78,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "getstream-chat-angular-example:build"
+            "browserTarget": "getstream-chat-angular:build"
           }
         },
         "test": {
@@ -94,13 +89,8 @@
             "tsConfig": "tsconfig.spec.json",
             "karmaConfig": "karma.conf.js",
             "inlineStyleLanguage": "scss",
-            "assets": [
-              "src/favicon.ico",
-              "src/assets"
-            ],
-            "styles": [
-              "src/styles.scss"
-            ],
+            "assets": ["src/favicon.ico", "src/assets"],
+            "styles": ["src/styles.scss"],
             "scripts": []
           }
         },
@@ -109,13 +99,13 @@
           "options": {
             "prerender": false,
             "ssr": false,
-            "browserTarget": "getstream-chat-angular-example:build:production",
-            "firebaseProject": "get-stream-io-decoded",
-            "firebaseHostingSite": "get-stream-io-decoded"
+            "browserTarget": "getstream-chat-angular:build:production",
+            "firebaseProject": "get-stream-io-chat",
+            "firebaseHostingSite": "get-stream-io-chat"
           }
         }
       }
     }
   },
-  "defaultProject": "getstream-chat-angular-example"
+  "defaultProject": "getstream-chat-angular"
 }

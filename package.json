@@ -1,12 +1,13 @@
 {
-  "name": "getstream-chat-angular-example",
+  "name": "getstream-chat-angular",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "deploy": "ng deploy"
   },
   "private": true,
   "dependencies": {
@@ -22,8 +23,9 @@
     "@angular/platform-browser-dynamic": "~13.3.0",
     "@angular/router": "~13.3.0",
     "@ngx-translate/core": "^14.0.0",
+    "cors": "^2.8.5",
     "rxjs": "~7.5.0",
-    "stream-chat": "^6.5.1",
+    "stream-chat": "^6.6.0",
     "stream-chat-angular": "^3.5.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.11.4"

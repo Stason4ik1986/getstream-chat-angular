@@ -8,9 +8,8 @@ describe('InviteButtonComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ InviteButtonComponent ]
-    })
-    .compileComponents();
+      declarations: [InviteButtonComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {
